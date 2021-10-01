@@ -55,7 +55,7 @@ def main():
 
         # prints
         os.system('clear||cls')
-        print("\n\n") # Brings the doughnut down in the terminal a bit so it looks more centered and not all the way at the top. (Makes it look better)
+        	print("\n\n") # Brings the doughnut down in the terminal a bit so it looks more centered and not all the way at the top. (Makes it look better)
         for index, char in enumerate(screen):
             if index % width == 0:
                 print()
