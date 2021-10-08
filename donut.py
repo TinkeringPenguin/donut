@@ -10,12 +10,8 @@ def main():
     #height=int(input("Enter Screen Height : "))
     #width=int(input("Enter Screen Width : "))
     
-	# for clearing console (windows and unix systems)
-    clear = "cls"
-    if os.name == "posix":
-        clear = "clear"
-
-    os.system(clear)
+    # os.system('clear||cls') works for both windows and unix/linux systems. Instead of defining "clear" with an if check/statement.
+    os.system('clear||cls')
     while True:
         z = [0 for _ in range(4*height*width)]
         screen = [' ' for _ in range(height*width)]
@@ -58,7 +54,8 @@ def main():
                     screen[o]=".,-~:;=!*#$@"[N if N>0 else 0]
 
         # prints
-        os.system(clear)
+        os.system('clear||cls')
+        print("\n\n") # Brings the doughnut down in the terminal a bit so it looks more centered and not all the way at the top. (Makes it look better)
         for index, char in enumerate(screen):
             if index % width == 0:
                 print()
