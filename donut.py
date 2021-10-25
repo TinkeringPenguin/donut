@@ -2,6 +2,7 @@ import os
 from math import sin, cos
 from numba import njit
 
+
 def main(speed):
     a=0
     b=0
@@ -11,12 +12,13 @@ def main(speed):
     #height=int(input("Enter Screen Height : "))
     #width=int(input("Enter Screen Width : "))
     
-	# for clearing console (windows and unix systems)
-    clear = "cls"
+	
+    # for clearing console (windows and unix systems)
+    clear = lambda: os.system("cls")
     if os.name == "posix":
-        clear = "clear"
+        clear = lambda :print("\x1b[d")
 
-    os.system(clear)
+    clear()
     @njit
     def faster(a,b):
         buf=""
@@ -61,8 +63,7 @@ def main(speed):
                     z[o]=mess
                     screen[o]=".,-~:;=!*#$@"[N if N>0 else 0]
 
-        # clears screen
-        print("\x1b[2J")  ##faster than calling os.system()
+        # print("\x1b[d")
         for index, char in enumerate(screen):
             if index % width == 0:
                 buf+="\n"
@@ -71,8 +72,11 @@ def main(speed):
         return(buf)
 
     while True:
-        # os.system("clear") slower than line 65 and causes flicker
+        # clear()
+        # print("\x1b[2J")
+        clear()
         print(faster(a,b),end='')
+        
         # increments with speed
         a+=0.04*speed
         b+=0.02*speed
