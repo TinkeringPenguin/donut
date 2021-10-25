@@ -1,5 +1,7 @@
+#! /usr/bin/env python3
+
 import os
-from math import sin, cos
+from math import sin, cos,pi
 from numba import njit
 
 
@@ -7,30 +9,27 @@ def main(speed):
     a=0
     b=0
 
-    height=24
-    width=80
-    #height=int(input("Enter Screen Height : "))
-    #width=int(input("Enter Screen Width : "))
-    
-	
+    print("\x1b[2J",end="")
     # for clearing console (windows and unix systems)
     clear = lambda: os.system("cls")
     if os.name == "posix":
-        clear = lambda :print("\x1b[d")
+        clear = lambda :print("\x1b[d",end="")
 
     clear()
     @njit
-    def faster(a,b):
+    def faster(a,b,scale):
+        height=int(24*scale)
+        width=int(80*scale)
+        # print(f" w={width},h={height}")
         buf=""
 
         z = [0 for _ in range(4*height*width)]
         screen = [' ' for _ in range(height*width)]
-
         j=0
-        while j<6.28:
+        while j<pi*2:
             j+=0.07
             i=0
-            while i<6.28:
+            while i<pi*2:
                 i+=0.02
 
                 sinA=sin(a)
@@ -48,9 +47,9 @@ def main(speed):
                 t=sini*cosj2*cosA-sinj* sinA
 
                 # 40 is the left screen shift
-                x = int(40+30*mess*(cosi*cosj2*cosB-t*sinB))
+                x = int(scale*40+scale*30*mess*(cosi*cosj2*cosB-t*sinB))
                 # 12 is the down screen shift
-                y = int(11+15*mess*(cosi*cosj2*sinB +t*cosB))
+                y = int(scale*11+scale*15*mess*(cosi*cosj2*sinB +t*cosB))
                 # all are casted to int, ie floored
                 o = int(x+width*y)
                 # multiplying by 8 to bring in range 0-11 as 8*(sqrt(2))=11
@@ -72,14 +71,14 @@ def main(speed):
         return(buf)
 
     while True:
-        # clear()
-        # print("\x1b[2J")
+        # Automatically adjust Donut scale according to terminal size
+        scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)
+        print(faster(a,b,scale),end='')
         clear()
-        print(faster(a,b),end='')
         
         # increments with speed
         a+=0.04*speed
         b+=0.02*speed
 
 if __name__ == "__main__":
-    main(speed=1)
+    main(speed=1.5)
