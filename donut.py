@@ -1,6 +1,6 @@
 #! /usr/bin/env python3
 
-import os
+import os,time
 from math import sin, cos,pi
 from numba import njit
 
@@ -9,18 +9,18 @@ def main(speed):
     a=0
     b=0
 
+    fps=0
     print("\x1b[2J",end="")
     # for clearing console (windows and unix systems)
     clear = lambda: os.system("cls")
     if os.name == "posix":
-        clear = lambda :print("\x1b[d",end="")
+        clear = lambda :print("\x1bc",end="")
 
     clear()
     @njit
     def faster(a,b,scale):
         height=int(24*scale)
         width=int(80*scale)
-        # print(f" w={width},h={height}")
         buf=""
 
         z = [0 for _ in range(4*height*width)]
@@ -62,7 +62,6 @@ def main(speed):
                     z[o]=mess
                     screen[o]=".,-~:;=!*#$@"[N if N>0 else 0]
 
-        # print("\x1b[d")
         for index, char in enumerate(screen):
             if index % width == 0:
                 buf+="\n"
@@ -72,8 +71,13 @@ def main(speed):
 
     while True:
         # Automatically adjust Donut scale according to terminal size
-        scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)
+        scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)*0.9
+        print(fps,end="")
+        
+        before=time.time()
         print(faster(a,b,scale),end='')
+        fps=round(1/(time.time()-before),1)
+        
         clear()
         
         # increments with speed
