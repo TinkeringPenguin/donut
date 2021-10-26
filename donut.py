@@ -9,7 +9,7 @@ def main(speed):
     a=0
     b=0
 
-    fps=0
+    fps,rate,=0,0
     print("\x1b[2J",end="")
     # for clearing console (windows and unix systems)
     clear = lambda: os.system("cls")
@@ -73,16 +73,19 @@ def main(speed):
         # Automatically adjust Donut scale according to terminal size
         scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)*0.9
         print(fps,end="")
-        
+
         before=time.time()
         print(faster(a,b,scale),end='')
         fps=round(1/(time.time()-before),1)
+
+        #Keep speed of spinning constant as 
+        rate=100*speed/fps
         
         clear()
         
         # increments with speed
-        a+=0.04*speed
-        b+=0.02*speed
+        a+=0.04*rate
+        b+=0.02*rate
 
-if __name__ == "__main__":
-    main(speed=1.5)
+if __name__ =="__main__":
+    main(speed=1)
