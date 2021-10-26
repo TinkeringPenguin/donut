@@ -70,22 +70,30 @@ def main(speed):
         return(buf)
 
     while True:
-        # Automatically adjust Donut scale according to terminal size
-        scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)*0.9
-        print(fps,end="")
+        try:
+            before=time.time()
+            # Automatically adjust Donut scale according to terminal size
 
-        before=time.time()
-        print(faster(a,b,scale),end='')
-        fps=round(1/(time.time()-before),1)
+            scale=min(os.get_terminal_size().lines/24,os.get_terminal_size().columns/80)*0.9
+            print(f"|{fps}|",end="")
+            
+            print(faster(a,b,scale),end='')
+            fps=round(1/(time.time()-before),1)
 
-        #Keep speed of spinning constant as 
-        rate=100*speed/fps
-        
-        clear()
-        
-        # increments with speed
-        a+=0.04*rate
-        b+=0.02*rate
+            #Keep speed of spinning constant as 
+            rate=100*speed/fps
+            
+            clear()
+            
+            # increments with speed
+            a+=0.04*rate
+            b+=0.02*rate
+
+        except KeyboardInterrupt:
+            # print(faster(a,b,scale),end='')
+            print("")
+            exit()
+
 
 if __name__ =="__main__":
-    main(speed=1)
+    main(speed=0.3)
