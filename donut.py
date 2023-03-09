@@ -7,10 +7,10 @@ def main():
 
     height=24
     width=80
-    #height=int(input("Enter Screen Height : "))
-    #width=int(input("Enter Screen Width : "))
+    # height=int(input("Enter Screen Height : "))
+    # width=int(input("Enter Screen Width : "))
     
-	# for clearing console (windows and unix systems)
+    # for clearing console (windows and unix systems)
     clear = "cls"
     if os.name == "posix":
         clear = "clear"
