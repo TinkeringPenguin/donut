@@ -5,7 +5,7 @@ def main():
     a=0
     b=0
 
-    height=24
+    height=25
     width=80
     # height=int(input("Enter Screen Height : "))
     # width=int(input("Enter Screen Width : "))
@@ -41,10 +41,10 @@ def main():
                 mess=1/(sini*cosj2*sinA+sinj*cosA+5)
                 t=sini*cosj2*cosA-sinj* sinA
 
-                # 40 is the left screen shift
-                x = int(40+30*mess*(cosi*cosj2*cosB-t*sinB))
-                # 12 is the down screen shift
-                y = int(11+15*mess*(cosi*cosj2*sinB +t*cosB))
+                # (width/2) is the left screen shift - centralise in display window
+                x = int((width/2)+30*mess*(cosi*cosj2*cosB-t*sinB))
+                # (height/2) is the down screen shift - centralise in display window
+                y = int((height/2)+15*mess*(cosi*cosj2*sinB +t*cosB))
                 # all are casted to int, ie floored
                 o = int(x+width*y)
 				# multiplying by 8 to bring in range 0-11 as 8*(sqrt(2))=11
