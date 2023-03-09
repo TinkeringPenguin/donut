@@ -1,6 +1,6 @@
 # Donuts! 🍩
 
-![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) 
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg) ![GitHub Repo stars](https://img.shields.io/github/stars/TinkeringPenguin/donut?color=g "GitHub Repo stars") 
 
 Donuts for all your donut needs! See the YouTube video: [youtu.be/D26bLJ9ut88](https://youtu.be/D26bLJ9ut88)
 
